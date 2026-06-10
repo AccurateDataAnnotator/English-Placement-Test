@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADA English Placement & Language Transfer Test</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --container-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-color: #2563eb;
+            --accent-light: #eff6ff;
+            --border-color: #e2e8f0;
+            --success-color: #16a34a;
+            --danger-color: #dc2626;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .meta-badge {
+            background-color: var(--accent-light);
+            color: var(--accent-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .instructions-box {
+            background-color: #f1f5f9;
+            border-left: 4px solid var(--text-muted);
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 32px;
+            font-size: 15px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: var(--text-main);
+            margin: 40px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title span {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+
+        .question-block {
+            margin-bottom: 32px;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .audio-script-box {
+            background-color: #fafafa;
+            border: 1px dashed #cbd5e1;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .audio-cue {
+            font-style: italic;
+            color: #7c3aed;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .options-list {
+            list-style: none;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-item:hover {
+            background-color: var(--accent-light);
+            border-color: var(--accent-color);
+        }
+
+        .option-item input[type="radio"] {
+            margin-top: 5px;
+        }
+
+        .text-passage {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            color: #334155;
+        }
+
+        .constraints-list {
+            margin-left: 20px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--danger-color);
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+            resize: vertical;
+            margin-bottom: 8px;
+        }
+
+        .arabic-text {
+            direction: rtl;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: right;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .option-item.rtl-layout {
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: background-color 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        #results-card {
+            display: none;
+            background: #f0fdf4;
+            border: 2px solid #bbf7d0;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+            color: #166534;
+        }
+
+        #results-card h3 {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>ADA Advanced English Placement & Language Transfer Test</h1>
+        <div class="meta-info">
+            <span class="meta-badge">Level: Expert (C1-C2)</span>
+            <span>Time Allowed: 60 Minutes</span>
+            <span>Target: Bilingual Data Annotators</span>
+        </div>
+    </div>
+
+    <div class="instructions-box">
+        <strong>Instructions for Candidates:</strong> Please read and respond to all sections with complete analytical precision. This test measures your ability to interpret subtle semantic nuances, follow strict formatting constraints, and handle professional English-Arabic translation without reverting to mechanical, word-for-word interpretation.
+    </div>
+
+    <div id="results-card">
+        <h3>Test Submitted Successfully!</h3>
+        <p>Your responses have been recorded for evaluation. Since this assessment features advanced text-transfer and constraint-following components, our operations team will manually grade your open-ended segments against the ADA Certified Rubric.</p>
+    </div>
+
+    <form id="assessmentForm" onsubmit="handleSubmit(event)">
+
+        <div class="section-title">
+            <h2>Section 1: Listening & Audio Comprehension</h2>
+            <span>10 Minutes</span>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">Audio Track 1: The AI Optimization Debate</p>
+            <div class="audio-script-box">
+                <span class="audio-cue">[Audio Context: Standard professional mid-Atlantic accent, rapid workspace tempo, natural minor hesitation]</span>
+                "While the preliminary rollout of the model's architecture yielded... well, frankly, sub-optimal throughput, the subsequent iterations didn't exactly set the world on fire either. It wasn't until we decoupled the attention mechanisms from the core embedding layers that we saw any semblance of parity with the benchmark data. Even so, the engineering team maintains that over-indexing on these specific parameters is a fool’s errand, given the diminishing returns on compute efficiency. We are essentially splitting hairs at this point, rather than addressing the structural bottleneck in the pipeline."
+            </div>
+            
+            <p class="question-text">1.1 What is the speaker’s core perspective on the engineering team's current optimization efforts?</p>
+            <div class="options-list">
+                <label class="option-item">
+                    <input type="radio" name="q1_1" value="A" required>
+                    <span>A) The model is finally outperforming the benchmark data after the latest architectural changes.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q1_1" value="B">
+                    <span>B) The team is wasting time on minor adjustments with negligible impact instead of fixing the main issue.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q1_1" value="C">
+                    <span>C) Decoupling the attention mechanisms was a critical mistake that caused a structural bottleneck.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q1_1" value="D">
+                    <span>D) The compute efficiency is dropping because the team refuses to index specific parameters.</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">1.2 Based on the audio context, what does the phrase "didn't exactly set the world on fire" imply about the subsequent iterations?</p>
+            <div class="options-list">
+                <label class="option-item">
+                    <input type="radio" name="q1_2" value="A" required>
+                    <span>A) They caused severe server overheating and pipeline failures.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q1_2" value="B">
+                    <span>B) They were highly controversial and sparked intense debate.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q1_2" value="C">
+                    <span>C) They were mediocre and failed to deliver impressive results.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q1_2" value="D">
+                    <span>D) They completely revolutionized the throughput standards.</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">Audio Track 2: The Project Pivot</p>
+            <div class="audio-script-box">
+                <span class="audio-cue">[Audio Context: Remote conference call static hum, crisp deliberate cadence, upward inflection]</span>
+                "We originally slated the dataset delivery for Thursday, assuming the automated filtering script ran without a hitch. However, the edge cases we encountered in the content moderation tier required manual triage. Consequently, we aren't pushed back to next week, but we will be taking the full contingency window to finalize the annotations."
+            </div>
+            
+            <p class="question-text">1.3 When will the dataset most likely be delivered if the team utilizes their full contingency window?</p>
+            <div class="options-list">
+                <label class="option-item">
+                    <input type="radio" name="q1_3" value="A" required>
+                    <span>A) On Thursday, exactly as originally scheduled.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q1_3" value="B">
+                    <span>B) Sometime before Thursday, because the manual triage went faster than expected.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q1_3" value="C">
+                    <span>C) Next week, due to the unexpected content moderation complications.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q1_3" value="D">
+                    <span>D) Later than Thursday, but still within the current week's buffer period.</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Section 2: Advanced Syntax & Error Detection</h2>
+            <span>15 Minutes</span>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">2.1 Identify the primary grammatical or stylistic flaw in the following sentence:</p>
+            <div class="text-passage">
+                "Having analyzed the training data for over forty hours, the anomalies in the validation set still seemed completely inexplicable to the engineering team."
+            </div>
+            <div class="options-list">
+                <label class="option-item">
+                    <input type="radio" name="q2_1" value="A" required>
+                    <span>A) "Seemed completely inexplicable" is a redundant phrase.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q2_1" value="B">
+                    <span>B) The modifier "Having analyzed..." incorrectly modifies "the anomalies" instead of "the engineering team."</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q2_1" value="C">
+                    <span>C) The tense shifts incorrectly from the past participle to the simple past.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q2_1" value="D">
+                    <span>D) "Over forty hours" should be written using numerals rather than words.</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">2.2 Which correction makes this sentence grammatically pristine for a formal technical report?</p>
+            <div class="text-passage">
+                "If the model was capable of processing semantic nuances natively, we would not have had to implement the secondary rule-based layer during last month's system overhaul."
+            </div>
+            <div class="options-list">
+                <label class="option-item">
+                    <input type="radio" name="q2_2" value="A" required>
+                    <span>A) Change "was capable" to "were capable".</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q2_2" value="B">
+                    <span>B) Change "would not have had" to "will not have had".</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q2_2" value="C">
+                    <span>C) Change "during last month's" to "in the duration of last month".</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q2_2" value="D">
+                    <span>D) The sentence is already entirely correct.</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Section 3: Reading, Logic & Semantic Drift</h2>
+            <span>15 Minutes</span>
+        </div>
+
+        <div class="text-passage">
+            <strong>Context Passage:</strong><br>
+            "The democratization of generative AI assumes that access directly correlates with utility. However, this premise conflates availability with capability. While a baseline model can generate grammatically pristine prose, its utility is bottlenecked by the user's prompt literacy. Without explicit, nuanced constraints, the model defaults to a probabilistic mean—generating text that is safe, generic, and ultimately devoid of domain-specific insight. Therefore, the value vector shifts from the model's intrinsic architecture to the end-user's iterative steering."
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">3.1 Which statement best captures the author's primary argument?</p>
+            <div class="options-list">
+                <label class="option-item">
+                    <input type="radio" name="q3_1" value="A" required>
+                    <span>A) Access to AI tools automatically makes the workforce more productive and highly capable.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q3_1" value="B">
+                    <span>B) An AI model's true value is heavily dependent on the user's ability to guide it effectively.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q3_1" value="C">
+                    <span>C) Generative AI models are inherently flawed because they default to unsafe, generic prose.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q3_1" value="D">
+                    <span>D) Prompt literacy is an unteachable skill that restricts the democratization of technology.</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">3.2 As used in the passage, what does the term "probabilistic mean" most closely signify?</p>
+            <div class="options-list">
+                <label class="option-item">
+                    <input type="radio" name="q3_2" value="A" required>
+                    <span>A) A highly accurate mathematical formula used to predict system crashes.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q3_2" value="B">
+                    <span>B) An offensive or aggressive tone generated by unmoderated datasets.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q3_2" value="C">
+                    <span>C) The most average, predictable, and middle-of-the-road response style.</span>
+                </label>
+                <label class="option-item">
+                    <input type="radio" name="q3_2" value="D">
+                    <span>D) A localized network error caused by poor processing capability.</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Section 4: Strict Constraint Adherence (Practical Essay)</h2>
+            <span>10 Minutes</span>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">Task Description:</p>
+            <p style="margin-bottom: 12px; font-size: 15px;">Explain the difference between <strong>"tokenization"</strong> and <strong>"embedding"</strong> in natural language processing. You must follow all conditions outlined below explicitly.</p>
+            <ul class="constraints-list">
+                <li>Constraint 1: Your response must consist of EXACTLY 3 sentences.</li>
+                <li>Constraint 2: You MUST use the word "bridge" as a verb.</li>
+                <li>Constraint 3: Do NOT use the words "computer" or "machine" anywhere in your text.</li>
+            </ul>
+            <textarea id="essay_response" placeholder="Type your 3-sentence response here..." required></textarea>
+        </div>
+
+        <div class="section-title">
+            <h2>Section 5: Arabic-English Language Transfer</h2>
+            <span>10 Minutes</span>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">5.1 Read the following professional corporate sentence:</p>
+            <div class="text-passage">
+                "The regional manager requested a deep-dive analysis to address the team’s plummeting retention rates before the upcoming fiscal review."
+            </div>
+            <p class="question-text">Which Arabic translation captures the professional tone and exact meaning most accurately without sounding overly literal or Westernized?</p>
+            <div class="options-list">
+                <label class="option-item rtl-layout">
+                    <input type="radio" name="q5_1" value="A" required>
+                    <span class="arabic-text">أ) طلب المدير الإقليمي تحليلاً عميق الغوص لمعالجة معدلات استبقاء الفريق المتهاوية قبل المراجعة المالية القادمة.</span>
+                </label>
+                <label class="option-item rtl-layout">
+                    <input type="radio" name="q5_1" value="B">
+                    <span class="arabic-text">ب) وجه المدير الإقليمي بإجراء تحليل دقيق وشامل لمعالجة التراجع الحاد في معدلات استبقاء الموظفين قبل موعد التقييم المالي المقبل.</span>
+                </label>
+                <label class="option-item rtl-layout">
+                    <input type="radio" name="q5_1" value="C">
+                    <span class="arabic-text">ج) سأل مدير المنطقة عن تحليل في العمق للتعامل مع نسب الاحتفاظ بالفريق الهابطة قبل فحص السَنة المالية القادم.</span>
+                </label>
+                <label class="option-item rtl-layout">
+                    <input type="radio" name="q5_1" value="D">
+                    <span class="arabic-text">د) طلب المدير الإقليمي تحليل غوص عميق لحل مشكلة عدم بقاء الفريق الساقطة قبل مراجعة الميزانية القادمة.</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">5.2 Compare these two Arabic sentences translating the English phrase: <em>"The project was executed with mixed results."</em></p>
+            <div class="text-passage">
+                <div class="arabic-text" style="text-align: left; direction: ltr; margin-bottom: 8px;"><strong>1. العبارة الأولى:</strong> تفاوتت نتائج تنفيذ المشروع.</div>
+                <div class="arabic-text" style="text-align: left; direction: ltr;"><strong>2. العبارة الثانية:</strong> تم تنفيذ المشروع بنتائج مختلطة.</div>
+            </div>
+            <p class="question-text">In 2 to 3 sentences, explain why the first phrase is superior for a professional Arabic audience, highlighting the underlying flaw in the second phrase.</p>
+            <textarea id="nuance_response" placeholder="Provide your analytical comparison..." required></textarea>
+        </div>
+
+        <div class="question-block">
+            <p class="question-text">5.3 Paragraph Translation:</p>
+            <p style="margin-bottom: 12px; font-size: 15px;">Translate the following English passage into natural, professional, and cohesive Arabic. Avoid structural calques (literal wording) and ensure natural phrasing flow.</p>
+            <div class="text-passage">
+                "Great communication isn't just about avoiding grammatical errors; it is about humanizing the message so it genuinely resonates with the target audience. When content feels overly rigid or mechanical, readers detach, causing the core insight to lose its intended impact."
+            </div>
+            <textarea id="translation_response" placeholder="اكتب الترجمة هنا..." style="direction: rtl; text-align: right;" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Assessment</button>
+    </form>
+</div>
+
+<script>
+    function handleSubmit(event) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.getElementById('results-card').style.display = 'block';
+        
+        const elements = document.getElementById('assessmentForm').elements;
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].disabled = true;
+        }
+    }
+</script>
+
+</body>
+</html>
